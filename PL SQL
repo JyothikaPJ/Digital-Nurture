@@ -1,0 +1,160 @@
+PL SQL
+Exercise 1
+scenario 1
+DECLARE
+BEGIN
+    FOR cust IN (
+        SELECT CustomerID
+        FROM Customers
+        WHERE Age > 60
+    )
+    LOOP
+        UPDATE Loans
+        SET InterestRate = InterestRate - 1
+        WHERE CustomerID = cust.CustomerID;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Discount applied for Customer ID: ' ||
+            cust.CustomerID
+        );
+    END LOOP;
+
+    COMMIT;
+END;
+
+scenario 2
+DECLARE
+BEGIN
+    FOR cust IN (
+        SELECT CustomerID
+        FROM Customers
+        WHERE Balance > 10000
+    )
+    LOOP
+        UPDATE Customers
+        SET IsVIP = 'TRUE'
+        WHERE CustomerID = cust.CustomerID;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'VIP status granted to Customer ID: ' ||
+            cust.CustomerID
+        );
+    END LOOP;
+
+    COMMIT;
+END;
+scenario 3
+DECLARE
+BEGIN
+    FOR loan_rec IN (
+        SELECT c.CustomerID,
+               c.Name,
+               l.LoanID,
+               l.DueDate
+        FROM Customers c
+        JOIN Loans l
+        ON c.CustomerID = l.CustomerID
+        WHERE l.DueDate BETWEEN SYSDATE
+                            AND SYSDATE + 30
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            'Reminder: Loan ID ' ||
+            loan_rec.LoanID ||
+            ' for customer ' ||
+            loan_rec.Name ||
+            ' is due on ' ||
+            TO_CHAR(loan_rec.DueDate, 'DD-MON-YYYY')
+        );
+    END LOOP;
+END;
+
+Exercise 3
+
+Scenario 1
+CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest
+AS
+BEGIN
+    UPDATE Accounts
+    SET Balance = Balance + (Balance * 0.01)
+    WHERE AccountType = 'Savings';
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Monthly interest applied successfully.');
+END;
+
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus(
+    p_department_id IN NUMBER,
+    p_bonus_percent IN NUMBER
+)
+AS
+BEGIN
+    UPDATE Employees
+    SET Salary = Salary + (Salary * p_bonus_percent / 100)
+    WHERE DepartmentID = p_department_id;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Bonus updated successfully.');
+END;
+
+Scenario 2
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus(
+    p_department_id IN NUMBER,
+    p_bonus_percent IN NUMBER
+)
+AS
+BEGIN
+    UPDATE Employees
+    SET Salary = Salary + (Salary * p_bonus_percent / 100)
+    WHERE DepartmentID = p_department_id;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Bonus updated successfully.');
+END;
+
+Scenario 3
+CREATE OR REPLACE PROCEDURE TransferFunds(
+    p_source_account IN NUMBER,
+    p_destination_account IN NUMBER,
+    p_amount IN NUMBER
+)
+AS
+    v_balance NUMBER;
+BEGIN
+
+    SELECT Balance
+    INTO v_balance
+    FROM Accounts
+    WHERE AccountID = p_source_account;
+
+    IF v_balance >= p_amount THEN
+
+        UPDATE Accounts
+        SET Balance = Balance - p_amount
+        WHERE AccountID = p_source_account;
+
+        UPDATE Accounts
+        SET Balance = Balance + p_amount
+        WHERE AccountID = p_destination_account;
+
+        COMMIT;
+
+        DBMS_OUTPUT.PUT_LINE('Transfer Successful.');
+
+    ELSE
+
+        DBMS_OUTPUT.PUT_LINE('Insufficient Balance.');
+
+    END IF;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Account not found.');
+
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
