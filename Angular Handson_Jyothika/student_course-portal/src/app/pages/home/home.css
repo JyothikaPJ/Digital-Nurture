@@ -1,0 +1,15 @@
+h1{
+    margin-top:20px;
+}
+.stats
+{
+    display:flex;
+    gap:30px;
+    margin-top:20px;
+}
+.stats div{
+    border:1px solid #ddd;
+    padding:20px;
+    width:180 px;
+    text-align:center;
+}
