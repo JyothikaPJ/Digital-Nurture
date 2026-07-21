@@ -1,0 +1,23 @@
+<app-course-card
+*ngFor="let c of courses"
+[course]="c">
+</app-course-card>
+<div>
+    <h3>{{course.name}}</h3>
+    <p>{{course.code}}</p>
+    <p>{{course.credits}}Credits</p>
+</div>
+<div class="card">
+    <h2>{{course.name}}</h2>
+    <p>
+        Course Code:
+        {{course.code}}
+    </p>
+    <p>
+        Credits:
+        {{course.credits}}
+    </p>
+</div>
+<button
+(click)="enrollRequested.emit(course.id)">
+Enroll</button>
