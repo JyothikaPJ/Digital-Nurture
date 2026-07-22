@@ -1,14 +1,28 @@
-nav{
-    background:#1976d2;
-    color:white;
-    padding:15px;
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(90deg, #10233d, #1e5d8c);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(16, 35, 61, 0.18);
 }
-nav a{
-    color:white;
-    margin-right:20px;
-    text-decoration:none;
+
+nav h2 {
+    margin: 0 1rem 0 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
 }
-nav h2{
-    display:inline-block;
-    margin-right:30px;
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
 }

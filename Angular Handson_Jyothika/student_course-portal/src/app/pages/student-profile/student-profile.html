@@ -1,1 +1,17 @@
-<p>student-profile works!</p>
+<section class="profile">
+	<h1>Student Profile</h1>
+	<p>Courses currently enrolled for the active student.</p>
+
+	<div *ngIf="enrolledCourses$ | async as enrolledCourses; else loading">
+		<p *ngIf="!enrolledCourses.length">No courses enrolled yet.</p>
+		<ul *ngIf="enrolledCourses.length">
+			<li *ngFor="let course of enrolledCourses">
+				{{ course.name }} ({{ course.code }})
+			</li>
+		</ul>
+	</div>
+
+	<ng-template #loading>
+		<p>Loading profile...</p>
+	</ng-template>
+</section>

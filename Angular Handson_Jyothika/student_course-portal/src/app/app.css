@@ -1,0 +1,10 @@
+.global-loading {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 0.75rem 1rem;
+  background: #fff4cc;
+  color: #6b4f00;
+  border-bottom: 1px solid #f1d37a;
+  font-weight: 600;
+}

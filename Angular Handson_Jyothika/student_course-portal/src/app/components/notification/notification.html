@@ -1,0 +1,4 @@
+<section class="notification-demo">
+  <p class="note">Component-level provider demo</p>
+  <p *ngIf="notificationService.message$ | async as message">{{ message }}</p>
+</section>

@@ -1,30 +1,31 @@
-<h1>{{portalName}}</h1>
-<p>
-    Manage your courses,view your profile and track your academic progress
-</p>
-<div class="stats">
-    <div>
-        <h3>Courses Available</h3>
-        <p>{{availableCourses}}</p>
+<section class="hero">
+    <p class="eyebrow">Digital Nurture 5.0</p>
+    <h1>{{ portalName }}</h1>
+    <p class="lead">Manage your courses, view your profile, and track academic progress from one place.</p>
+
+    <div class="stats">
+        <div>
+            <h3>Courses Available</h3>
+            <p>{{ availableCourses }}</p>
+        </div>
+        <div>
+            <h3>Enrolled</h3>
+            <p>{{ enrolledCourses }}</p>
+        </div>
+        <div>
+            <h3>GPA</h3>
+            <p>{{ gpa }}</p>
+        </div>
     </div>
-    <div>
-        <h3>Enrolled</h3>
-        <p>3</p>
+
+    <div class="actions">
+        <button [disabled]="!isPortalActive" (click)="onEnrollClick()">Enroll Now</button>
+        <span>{{ message }}</span>
     </div>
-    <div>
-        <h3>GPA</h3>
-        <p>3.8</p>
-    </div>
-</div>
-<button [disabled]="!isPortalActive"
-(click)="onEnrollClick()">
-    Enroll Now
-</button>
-<p>{{message}}</p>
-<br><br>
-<input type="text" placeholder="Search courses"
-[(ngModel)]="searchTerm">
-<p>
-    Searching for:
-    {{searchTerm}}
-</p>
+
+    <label class="search">
+        <span>Search courses</span>
+        <input type="text" placeholder="Search courses" [(ngModel)]="searchTerm" />
+    </label>
+    <p class="search-feedback">Searching for: {{ searchTerm }}</p>
+</section>

@@ -1,0 +1,12 @@
+<section class="detail" *ngIf="course; else missing">
+  <p class="eyebrow">Course detail</p>
+  <h2>{{ course.name }}</h2>
+  <p><strong>Code:</strong> {{ course.code }}</p>
+  <p><strong>Credits:</strong> {{ course.credits }}</p>
+  <p><strong>Status:</strong> {{ course.gradeStatus }}</p>
+  <a routerLink="/courses">Back to course list</a>
+</section>
+
+<ng-template #missing>
+  <p>Course not found.</p>
+</ng-template>

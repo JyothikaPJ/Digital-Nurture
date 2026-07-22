@@ -1,15 +1,88 @@
-h1{
-    margin-top:20px;
+.hero {
+    padding: 2rem 1.5rem;
+    max-width: 980px;
+    margin: 0 auto;
 }
-.stats
-{
-    display:flex;
-    gap:30px;
-    margin-top:20px;
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #7a5d19;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
 }
-.stats div{
-    border:1px solid #ddd;
-    padding:20px;
-    width:180 px;
-    text-align:center;
+
+h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.lead {
+    color: #4a5568;
+    max-width: 60ch;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stats div {
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 1.1rem;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(16, 35, 61, 0.08);
+}
+
+.stats h3,
+.stats p {
+    margin: 0;
+}
+
+.stats p {
+    margin-top: 0.4rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.8rem 1.2rem;
+    background: #111827;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.search {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 360px;
+}
+
+.search input {
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+}
+
+.search-feedback {
+    color: #4b5563;
 }

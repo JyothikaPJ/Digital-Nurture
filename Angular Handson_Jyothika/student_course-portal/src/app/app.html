@@ -1,2 +1,3 @@
 <app-header></app-header>
+<div class="global-loading" *ngIf="loading$ | async">Loading portal...</div>
 <router-outlet></router-outlet>

@@ -1,0 +1,46 @@
+<section class="enrollment">
+  <h1>Enrollment Request</h1>
+
+  <form #enrollForm="ngForm" (ngSubmit)="onSubmit(enrollForm)">
+    <label>
+      <span>Student Name</span>
+      <input name="studentName" required minlength="3" [(ngModel)]="studentName" #nameCtrl="ngModel" />
+      <small *ngIf="nameCtrl.touched && nameCtrl.errors?.['required']">Name is required</small>
+      <small *ngIf="nameCtrl.touched && nameCtrl.errors?.['minlength']">Name must be at least 3 characters</small>
+    </label>
+
+    <label>
+      <span>Student Email</span>
+      <input name="studentEmail" type="email" required email [(ngModel)]="studentEmail" #emailCtrl="ngModel" />
+      <small *ngIf="emailCtrl.touched && emailCtrl.errors?.['required']">Email is required</small>
+      <small *ngIf="emailCtrl.touched && emailCtrl.errors?.['email']">Enter a valid email address</small>
+    </label>
+
+    <label>
+      <span>Course ID</span>
+      <input name="courseId" required [(ngModel)]="courseId" #courseCtrl="ngModel" />
+      <small *ngIf="courseCtrl.touched && courseCtrl.errors?.['required']">Course ID is required</small>
+    </label>
+
+    <label>
+      <span>Preferred Semester</span>
+      <select name="preferredSemester" required [(ngModel)]="preferredSemester">
+        <option value="Odd">Odd</option>
+        <option value="Even">Even</option>
+      </select>
+    </label>
+
+    <label class="checkbox">
+      <input name="agreeToTerms" type="checkbox" required [(ngModel)]="agreeToTerms" #termsCtrl="ngModel" />
+      <span>I agree to the terms</span>
+      <small *ngIf="termsCtrl.touched && termsCtrl.errors?.['required']">You must accept the terms</small>
+    </label>
+
+    <div class="actions">
+      <button type="submit" [disabled]="enrollForm.invalid">Submit</button>
+      <button type="button" class="secondary" (click)="resetForm(enrollForm)">Reset</button>
+    </div>
+  </form>
+
+  <div class="success" *ngIf="submitted && enrollForm.valid">Enrollment request submitted successfully!</div>
+</section>

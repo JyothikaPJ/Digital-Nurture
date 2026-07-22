@@ -1,23 +1,27 @@
-<app-course-card
-*ngFor="let c of courses"
-[course]="c">
-</app-course-card>
-<div>
-    <h3>{{course.name}}</h3>
-    <p>{{course.code}}</p>
-    <p>{{course.credits}}Credits</p>
-</div>
-<div class="card">
-    <h2>{{course.name}}</h2>
-    <p>
-        Course Code:
-        {{course.code}}
-    </p>
-    <p>
-        Credits:
-        {{course.credits}}
-    </p>
-</div>
-<button
-(click)="enrollRequested.emit(course.id)">
-Enroll</button>
+<article *ngIf="course as currentCourse" class="card" [ngClass]="cardClasses" [ngStyle]="{ 'border-left-color': borderColor }" (click)="courseSelected.emit(currentCourse.id)">
+    <div class="card__header">
+        <h3>{{ currentCourse.name }}</h3>
+        <span class="badge" [ngSwitch]="currentCourse.gradeStatus">
+            <ng-container *ngSwitchCase="'passed'">Passed</ng-container>
+            <ng-container *ngSwitchCase="'failed'">Failed</ng-container>
+            <ng-container *ngSwitchDefault>Pending</ng-container>
+        </span>
+    </div>
+
+    <p><strong>Course Code:</strong> {{ currentCourse.code }}</p>
+    <p><strong>Credits:</strong> {{ currentCourse.credits | creditLabel }}</p>
+
+    <div class="card__actions">
+        <button type="button" (click)="onEnrollClick($event)">
+            {{ enrollmentService.isEnrolled(currentCourse.id) ? 'Unenroll' : 'Enroll' }}
+        </button>
+        <button type="button" class="secondary" (click)="toggleDetails($event)">
+            {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+        </button>
+    </div>
+
+    <div class="details" *ngIf="isExpanded">
+        <p>Course ID: {{ currentCourse.id }}</p>
+        <p>Status: {{ currentCourse.gradeStatus }}</p>
+    </div>
+</article>

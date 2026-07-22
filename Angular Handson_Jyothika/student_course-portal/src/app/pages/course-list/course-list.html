@@ -1,9 +1,36 @@
-<app-course-card
-*ngFor="let c of courses"
-[course]="c"
-(enrollRequested)="onEnroll($event)">
-</app-course-card>
-<p *ngIf="selectedCourseId">
-Selected course ID:
-{{selectedCourseId}}
-</p>
+<section class="course-list">
+	<div class="toolbar">
+		<div>
+			<p class="eyebrow">Course Listing</p>
+			<h1>Available Courses</h1>
+		</div>
+
+		<label class="search">
+			<span>Search</span>
+			<input type="text" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange($event)" placeholder="Search by name or code" />
+		</label>
+	</div>
+
+	<p *ngIf="isLoading">Loading courses...</p>
+	<p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+	<ng-container *ngIf="!isLoading">
+		<ng-container *ngIf="visibleCourses.length; else noCourses">
+			<div class="grid">
+				<app-course-card
+					*ngFor="let course of visibleCourses; let i = index; trackBy: trackByCourseId"
+					appHighlight
+					[course]="course"
+					(courseSelected)="openCourse($event)"
+					(enrollRequested)="onEnroll($event)">
+				</app-course-card>
+			</div>
+		</ng-container>
+	</ng-container>
+
+	<ng-template #noCourses>
+		<p>No courses available.</p>
+	</ng-template>
+
+	<p *ngIf="selectedCourseId" class="selected">Selected course ID: {{ selectedCourseId }}</p>
+</section>

@@ -1,0 +1,13 @@
+.notification-demo {
+  margin: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed #c7d2fe;
+  border-radius: 16px;
+}
+
+.note {
+  margin-top: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
